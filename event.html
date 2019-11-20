@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>event</title>
+<script type="text/javascript">
+	//借助window.onload事件,在这个页面加载完成后执行程序代码
+	//在页面页面加载完成后，通过onload去执行后面的方法
+	//这里的onload和onclick相当于是一个对象的方法或者是这个对相中用于保存一个方法的引用，
+	window.onload = function(){
+		var btn = document.getElementById("btnId");
+		var testreduce = document.getElementById("testreduce");
+        testreduce.onclick = function(){
+            // 第一个参数是回调函数，第二个是初始值
+			// array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+			// 用法1.数据元素求和
+            const arr = [1,2,3,4]
+			const sum = arr.reduce((total,current,index,arr)=>{
+			      console.log('总数：'+total+',当前值：'+current+',下标：'+index)
+			 	   return total+current
+				// 当没有初始值是， 总是是第一个元素，从第二个元素开始循环，下标存1开始
+                // 总数：1,当前值：2,下标：1
+                // 总数：3,当前值：3,下标：2
+                // 总数：6,当前值：4,下标：3
+			})
+			console.log('----------------------------------------------')
+            const sum2 = arr.reduce((total,current,index,arr)=>{
+                console.log('总数：'+total+',当前值：'+current+',下标：'+index)
+                return total+current
+                // 当有初始值是， 总数初始值初始值开始加，从第一个元素开始循环，下标存0开始
+                // 总数：0,当前值：1,下标：0
+                // 总数：1,当前值：2,下标：1
+                // 总数：3,当前值：3,下标：2
+                // 总数：6,当前值：4,下标：3
+            },0)
+			// 数组维度转化
+            console.log('----------------------------------------------')
+            let arrs = [[0, 1], [2, 3], [4,[5,6,7]]]
+			const newArr = arrs.reduce((pre,cur)=>pre.concat(Array.isArray(cur)?cur:[]),[])
+			console.log(newArr)
+            // let arr = [[0, 1], [2, 3], [4,[5,6,7]]]
+            // const newArr = function(arr){
+            //     return arr.reduce((pre,cur)=>pre.concat(Array.isArray(cur)?newArr(cur):cur),[])
+            // }
+            // console.log(newArr(arr)); //[0, 1, 2, 3, 4, 5, 6, 7]
+			// 数组去重
+            console.log('----------------------------------------------')
+			// const arr2 = [1,2,3,4,4,4,5,5,5]
+			const arr2 = []
+			const newArr2 = arr2.reduce((pre,cur)=>{
+			    console.log('循环的新数组：'+pre)
+			    if(!pre.includes(cur)) {
+			        return pre.concat(cur)
+				}else {
+			        return pre
+				}
+			},[])
+			console.log(newArr2)
+            console.log('----------------------------------------------')
+			// 对象属性求和
+		}
+		//为按钮绑定事件
+		btn.onclick = function(){
+			const list = []
+			const x1 = {name:'mazhiyuan',email:'123@qq.com'}
+			const x2 = {name:'mazhi',email:'123@qq'}
+			const x3 = {name:'ma',email:'123@'}
+            list.push(x1)
+            list.push(x2)
+            list.push(x3)
+			for (let i = 0; i < list.length ;i++) {
+			    console.log(list[i].name)
+			}
+		}
+	};
+</script>
+</head>
+<body>
+	<button id="testreduce">reduce</button>
+	<button id="btnId">SayHello</button>
+</body>
+</html>
