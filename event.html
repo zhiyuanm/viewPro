@@ -10,6 +10,7 @@
 	window.onload = function(){
 		var btn = document.getElementById("btnId");
 		var testreduce = document.getElementById("testreduce");
+		var filtertest = document.getElementById("filtertest");
         testreduce.onclick = function(){
             // 第一个参数是回调函数，第二个是初始值
 			// array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
@@ -58,8 +59,30 @@
 			console.log(newArr2)
             console.log('----------------------------------------------')
 			// 对象属性求和
+            console.log('----------------------------------------------')
 		}
+        filtertest.onclick = function(){
+            // 过滤符合的元素
+            const arrays = [{name:'aa',age:23},{name:'bb',age:24},{name:'aa',age:26}]
+            const newArrays = arrays.filter((item,index,array)=>{
+                console.log(item)
+                console.log(index)
+                console.log(array)
+				return item.name === 'aa'
+            })
+			console.log(newArrays)
+			// 使用filter取出元素为空的
+			const x = ['aa','',undefined,'bb']
+			const x2 = x.filter(item =>{
+			    return item
+			})
+			console.log(x2)
+			// filter元素去重
+            const arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];
+            const arr2 = arr.filter((x, index,self)=>self.indexOf(x)===index)
+            console.log(arr2); //[1, 2, 3, 4, 5, 6, 7, 8, 0, 56]
 
+		}
 		//为按钮绑定事件
 		btn.onclick = function(){
 			const list = []
@@ -79,5 +102,6 @@
 <body>
 	<button id="testreduce">reduce</button>
 	<button id="btnId">SayHello</button>
+	<button id="filtertest">filter使用</button>
 </body>
 </html>
